@@ -50,6 +50,8 @@ Para manter a organização, os projetos e exercícios estão separados em pasta
 * ├── Projeto-Agenda/
 * └── ...
 
+### Sugestão: Use a extensão "Better Comments" no VSCode para facilitar a visualização dos comentários feitos nos codigos.
+
 
 ## 👨‍💻 Sobre Mim
 

@@ -5,7 +5,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
 > Repositório dedicado a registrar meu progresso, projetos e anotações do curso **"JavaScript Moderno do Básico ao Avançado"** da Udemy.
-> #### Sugestão: Use a extensão "Better Comments" no VSCode para facilitar a visualização dos comentários feitos nos codigos.
+> #### Sugestão: Use a extensão "Better Comments" no VSCode para facilitar a visualização dos comentários feitos nos arquivos.
 
 ## 🎯 Sobre o Projeto
 

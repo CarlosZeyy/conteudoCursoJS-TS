@@ -4,10 +4,7 @@ class Cpf {
   }
 
   valida() {
-    if (typeof this.cpfLimpo === "undefined") return false;
-    if (this.cpfLimpo.length !== 11) return false;
-    if (this.isSequencia()) return false;
-
+    this.verificadores();
     const cpfParcial = this.cpfLimpo.slice(0, -2);
 
     const digito1 = this.criaDigito(cpfParcial);
@@ -15,6 +12,12 @@ class Cpf {
 
     const novoCpf = cpfParcial + digito1 + digito2;
     return novoCpf === this.cpfLimpo;
+  }
+
+  verificadores() {
+    if (typeof this.cpfLimpo === "undefined") return false;
+    if (this.cpfLimpo.length !== 11) return false;
+    if (this.isSequencia()) return false;
   }
 
   criaDigito(cpfIncompleto) {

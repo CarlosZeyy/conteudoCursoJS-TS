@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Aula 107 - Validando form</title>
+</head>
+
+<body>
+
+    <section class="container">
+        <h1>Formulário de cadastro</h1>
+        <div class="desc">
+            <ul>
+                <li>Nenhum campo pode estar vazio</li>
+                <li>Usuário só poderá conter letras e/ou números</li>
+                <li>Usuário deverá ter entre 3 e 12 caracteres</li>
+                <li>Senha precisa ter entre 6 e 12 caracteres</li>
+            </ul>
+        </div>
+
+        <form action="/" method="post" class="formulario">
+            <label for="name">Nome:</label>
+            <input type="text" id="input-name" class="name valid">
+
+            <label for="surname">Sobrenome:</label>
+            <input type="text" id="input-surname" class="surname valid">
+
+            <label for="CPF">CPF:</label>
+            <input type="text" id="input-cpf" class="cpf valid">
+
+            <label for="user">Usuário:</label>
+            <input type="text" id="input-user" class="user valid">
+
+            <label for="input-password">Senha:</label>
+            <input type="password" id="input-password" class="password valid">
+
+            <label for="input-confirmPassword">Repetir senha:</label>
+            <input type="password" id="input-confirmPassword" class="confirmPassword valid">
+
+            <button>Enviar</button>
+        </form>
+    </section>
+
+    <script src='./assets/js/validaCPF.js'></script>
+    <script src='./assets/js/index.js'></script>
+</body>
+
+</html>

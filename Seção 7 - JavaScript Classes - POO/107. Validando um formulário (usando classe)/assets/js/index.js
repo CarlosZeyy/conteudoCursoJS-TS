@@ -14,21 +14,28 @@ class ValidaForm {
     e.preventDefault();
     const validField = this.checkField();
     const validPassword = this.checkPassword();
+
+    if (validField && validPassword) {
+      alert('Fomulário enviado!');  
+      this.form.submit();
+    }
   }
 
   checkPassword() {
     let valid = true;
 
-    const passowrd = document.getElementById('password');
+    const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
 
-    if(passowrd.value !== confirmPassword.value) {
-      this.createError(passowrd, 'As senhas devem ser iguais.');
+    if(password.value !== confirmPassword.value) {
+      valid = false;
+      this.createError(password, 'As senhas devem ser iguais.');
       this.createError(confirmPassword, 'As senhas devem ser iguais.');
     }
 
-    if(passowrd.value.length < 6 || passowrd.value.length > 12) {
-      this.createError(passowrd, "Senha precisa ter entre 6 e 12 caracteres");
+    if(password.value.length < 6 || password.value.length > 12) {
+      valid = false;
+      this.createError(password, "Senha precisa ter entre 6 e 12 caracteres");
     }
 
     return valid;
@@ -61,6 +68,22 @@ class ValidaForm {
     return valid;
   }
 
+  validUser(field) {
+      const user = field.value;
+      let valid = true;
+  
+      if (user.length < 3 || user.length > 12) {
+        this.createError(field, "Usuario deve ter entre 3 a 12 caracteres.");
+        valid = false;
+      }
+  
+      if (!user.match(/[a-zA-Z0-9]/)) {
+        this.createError(field, "Usuario deve ter letras e/ou números");
+        valid = false;
+      }
+      return valid;
+    }
+
   validCPF(field) {
     const cpfUser = new Cpf(field.value);
     if (!cpfUser.valida()) {
@@ -68,18 +91,6 @@ class ValidaForm {
       return false;
     }
     return true;
-  }
-
-  validUser(field) {
-    const user = field.value;
-
-    if (user.length < 3 || user.length > 12) {
-      this.createError(field, "Usuario deve ter entre 3 a 12 caracteres.");
-    }
-
-    if (!user.match(/[a-zA-Z0-9]/)) {
-      this.createError(field, "Usuario deve ter letras e/ou números");
-    }
   }
 
   createError(field, msg) {

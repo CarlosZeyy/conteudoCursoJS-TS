@@ -21,8 +21,9 @@ funcao2(1, 2, 3, 4, 5, 6, 7);
 //
 
 console.log("\nFunção 3");
-function funcao3(a, b, c, d, e, f) {
-  console.log(a, b, c, d, e, f); //* Se eu tentar imprimir todos os parametros sem ter passado algum valor para eles, o valor retornado desses parametros sem valores sera "undefined", pois, o parametro nao possui valor, e isso eu posso definir dentro do escopo/bloco ou definir direto no parametro
+function funcao3(a, b, c, d = 0, e, f, g) {
+  e = 9
+  console.log(a, b, c, d, e, f, g); //* Se eu tentar imprimir todos os parametros sem ter passado algum valor para eles, o valor retornado desses parametros sem valores sera "undefined", pois, o parametro nao possui valor, e isso eu posso definir dentro do escopo/bloco ou definir direto no parametro
 }
 funcao3(1, 2, 3);
 //
@@ -35,7 +36,7 @@ function funcao4(a, b = 2, c = 4) {
 funcao4(2, 10, 20);
 funcao4(2, "", 20); //* Nao adianta colocar uma string vazia pois ele vai concatenar os valores, e se deixar um espaço em branco ele simplesmente vai dar erro.
 funcao4(2, null, 20); //* JS vai entender o null como se fosse um zero.
-funcao4(2, undefined, 20);
+funcao4(2, undefined, 20); //* Aqui ele entende que b é undefined e usa o valor padrão do b(2) definido la no paramêtro.
 //
 //
 

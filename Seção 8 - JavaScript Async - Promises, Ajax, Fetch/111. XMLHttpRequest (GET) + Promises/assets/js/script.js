@@ -11,6 +11,18 @@ const request = (obj) => {
         reject(xhr.responseText);
       }
     });
+
+    //* Outro meotodo de resolver o 'load'
+    // xhr.onload = () => {
+    //   if (xhr.status >= 200 && xhr.status < 300) {
+    //     resolve(xhr.responseText);
+    //   } else {
+    //     reject({
+    //       code: xhr.status,
+    //       msg: xhr.statusText,
+    //     });
+    //   }
+    // };
   });
 };
 

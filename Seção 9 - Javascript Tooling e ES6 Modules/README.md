@@ -1,0 +1,1 @@
+# Lembrar de instalar o node_modules quando puxar um repo mais atualizado. (npm install / npm i)

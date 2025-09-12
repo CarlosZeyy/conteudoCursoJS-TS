@@ -10,6 +10,8 @@ export function soma(x, y) {
 }
 
 export const texto = "Hello World";
+// * Tipo de export mais comum é o dos exemplos acima (Person, soma, texto).
+
 const texto2 = "Ola mundo";
 const numero = 24;
 

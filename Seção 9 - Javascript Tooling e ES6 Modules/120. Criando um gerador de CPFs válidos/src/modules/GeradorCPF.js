@@ -2,7 +2,15 @@ import ValidadorCpf from "./ValidadorCPF";
 
 export default class GeradorCPF {  
     rand(min = 100000000, max = 999999999) {
-        return String(Math.floor(Math.random() * (max - min) + min));
+        const digitos = String(Math.floor(Math.random() * (max - min) + min));
+
+        const sequency = Array.from(digitos).map(numero => {
+            return digitos[0] === numero;
+        })
+
+        if (sequency.length === digitos.length) return this.rand();
+
+        return digitos;
     }
 
     formatado(cpf) {

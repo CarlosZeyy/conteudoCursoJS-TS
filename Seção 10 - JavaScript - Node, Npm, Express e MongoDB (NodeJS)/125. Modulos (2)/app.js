@@ -1,10 +1,12 @@
-const { Person } = require('./mod1.js');
-const mod1 = require('./mod1.js');
+const Person = require("./Z/mod2.js");
+const path = require("path");
 
-const p1 = new Person('Carlos');
+const p1 = new Person("Carlos");
+p1.saudacao();
 
-const nomes = `${mod1.nome} ${mod1.sobrenome}`;
+console.log(__dirname); //* Mostra o diretorio até a pasta
+console.log(__filename); //* Mostra o diretorio até o arquivo
 
-console.log(mod1);
-console.log(p1);
-console.log(nomes);
+console.log()
+console.log(path.resolve(__dirname, '..', '..', 'arquivos', 'qualquerCoisa'));
+console.log(path.resolve(__dirname, '.', '.', 'arquivos', 'qualquerCoisa'));

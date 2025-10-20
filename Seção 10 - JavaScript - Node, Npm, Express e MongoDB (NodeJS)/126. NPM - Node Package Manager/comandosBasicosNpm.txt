@@ -1,0 +1,44 @@
+npm install / npm i > comandos para instalar algum pacote
+
+Ex: npm i express > instalando express na sua versão mais recente
+
+npm i express@2.1.1 > instalando versão especifica do express
+
+npm update > para atualizar o minor e patch de uma versão que tenha o "^" na dependencia
+
+    5.1.0 > versão mais recente do express até essa data (20/10/2025)
+
+          5      .1     .0
+        major   minor  patch
+        
+Quando se atualiza o patch normalmente é para correção de bugs ou falhas pequenas, para atualizar somente o patch se usa o "~" na Dependencies
+Quando se atualiza a minor é implementando novas funcionalidades(features) sem que o programa existente fique com o codigo quebrado
+Quando se atualiza a major é quando muitas funcionalidades mudam/são atualizadas e não funcionam com as versões anteriores/antigas da aplicação
+
+npm i express -E > instalando express sem o "^" para não atualizar os minors e patchs
+
+npm i express --save-dev > instalando express na devDependencies (Ambiente de desenvolvimento) 
+Não é mais necessario -> npm i express --save-prod > instalando express na Dependencies (Ambiente de prod)
+
+npm uninstall express / npm uni express > desinstalando o express
+
+npm ls --depth=numeroQualquer > para ver as dependencias de cada pacote instalado
+
+Ex: npm i express webpack
+
+Ex: npm ls --depth=0 > só vai ver o express e webpack nas dependencias
+Ex: npm ls --depth=1 > vai ver o express, webpack e as suas dependencias baixadas em 1 camada de pastas
+Ex: npm ls --depth=2 > vai ver mais afundo o que foi instalado e por ai vai...
+
+
+npm outdated > para ver a versão atual que está atualizada, a versão mais atualiza daquele major que se pode instalar e a ultima versão existente do pacote
+Se nas dependencias do package.json tiver um "^2.1.1" ele vai mostrar isso:
+
+Ex: pacote   current   Wanted   Lastest
+    express   2.1.1    2.5.11    5.1.0
+
+Se nas dependencias do package.json tiver um "~2.1.1" ele vai mostrar isso:
+pacote   current   Wanted   Lastest
+express   2.1.1    2.1.1    5.1.0
+
+só rodar um "npm update" e ja atualiza as versões

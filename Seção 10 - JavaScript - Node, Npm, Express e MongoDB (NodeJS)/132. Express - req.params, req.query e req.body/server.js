@@ -30,7 +30,7 @@ app.get("/teste{/:idUser}{/:parametro}", (req, res) => {
 });
 
 //? Versão 4.21 do express funcionaria desse jeito
-// app.get("/teste/idUser?", (req, res) => {
+// app.get("/teste/:idUser?", (req, res) => {
 //   console.log("req.params =", req.params);
 //   res.send(req.params.idUser);
 // });

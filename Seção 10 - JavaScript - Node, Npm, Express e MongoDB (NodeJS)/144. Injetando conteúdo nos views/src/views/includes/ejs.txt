@@ -1,0 +1,30 @@
+<% Controle de fluxo (if, for...) %>
+<%= imprime escapando caracteres %>
+<%- imprime sem escapar caracteres (executa pode ser codigos, styles,etc...) %>
+<%# Comentario %>
+<%- incule(caminho/arquivo) %>
+
+<% if (alguma coisa) { %>
+    <%= exibe alguma coisa %>
+<% } else { %>
+    <%= exibre outra coisa %>
+<% } %>
+
+
+exemplo 1: (dentro da tag h1 do index.ejs)
+
+    <% if (typeof titulo !== 'undefined') { %>
+       <%= titulo %>
+    <% } else { %>
+        O titulo não foi enviado.
+    <% } %>
+
+exemplo 2:
+
+    <% numeros.forEach(num => { %>
+        <%= num %><br>
+    <% }); %>
+
+exemplo 3: usando middleware
+
+<%= umaVarLocal %>

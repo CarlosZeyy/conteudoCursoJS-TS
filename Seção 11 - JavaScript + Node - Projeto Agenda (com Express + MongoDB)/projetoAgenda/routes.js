@@ -1,12 +1,15 @@
 import express from "express";
-import { homePage, postForm } from "./src/controllers/homeController.js";
-import { contactPage } from "./src/controllers/contactController.js";
+import { homePage } from "./src/controllers/homeController.js";
+import { login } from "./src/controllers/loginController.js";
+import { signup } from "./src/controllers/signupController.js";
 
 export const route = express.Router();
 
 // Home
 route.get("/", homePage);
-route.post("/", postForm);
 
-// contato
-route.get("/contact", contactPage);
+// login
+route.get('/login', login);
+
+//register
+route.get('/signup', signup);

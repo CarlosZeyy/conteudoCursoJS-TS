@@ -4,9 +4,10 @@ export const middlewareGlobal = (req, res, next) => {
 };
 
 export const checkCsrfError = (err, req, res, next) => {
-  if (err && err.code === 'EBADCSRFTOKEN') {
+  if (err) {
     return res.render('404');
   }
+  next();
 }
 
 export const csrfMiddleware = (req, res, next) => {

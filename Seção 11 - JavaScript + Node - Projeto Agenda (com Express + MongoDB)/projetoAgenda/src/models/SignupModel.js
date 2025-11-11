@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
 
 const SignUpSchema = new mongoose.Schema({
   email: {
@@ -27,6 +28,14 @@ export class SignUp {
   async register() {
     this.validate();
     if (this.errors.length > 0) return;
+    
+    await this.userExists();
+
+    if (this.errors.length > 0) return;
+
+    const salt = bcrypt.genSaltSync();
+    this.body.password = bcrypt.hashSync(this.body.password, salt);
+
     try {
       this.user = await SignUpModel.create(this.body);
     } catch (error) {
@@ -53,6 +62,14 @@ export class SignUp {
       this.errors.push(
         `A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial.`
       );
+  }
+
+  async userExists() {
+    const user = await SignUpModel.findOne({ email: this.body.email });
+
+    if (user) {
+      this.errors.push(`Usuário já existente.`);
+    }
   }
 
   cleanUp() {

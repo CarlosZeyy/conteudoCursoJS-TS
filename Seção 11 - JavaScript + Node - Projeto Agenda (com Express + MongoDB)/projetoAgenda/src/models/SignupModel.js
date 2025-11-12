@@ -40,6 +40,12 @@ export class SignUp {
       this.user = await SignUpModel.create(this.body);
     } catch (error) {
       console.log(error);
+
+      if (error.code === 11000) {
+        this.errors.push('E-mail já está em uso.');
+      } else {
+        this.errors.push('Erro interno ao criar usuário.');
+      }
     }
   }
 
@@ -57,7 +63,7 @@ export class SignUp {
       this.errors.push(`Senha precisa ter entre 8 e 50 caracteres.`);
 
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
     if (!passwordRegex.test(this.body.password))
       this.errors.push(
         `A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial.`

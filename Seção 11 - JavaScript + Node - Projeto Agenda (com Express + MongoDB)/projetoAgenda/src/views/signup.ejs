@@ -13,6 +13,14 @@
             <form action="/signup" method="post">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <div class="mb-3">
+                <label class="form-label">Nome:</label>
+                <input type="text" class="form-control" name="name" placeholder="digite seu nome..." />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Sobrenome:</label>
+                <input type="text" class="form-control" name="surname" placeholder="digite seu sobrenome.." />
+              </div>
+              <div class="mb-3">
                 <label class="form-label">Email:</label>
                 <input type="email" class="form-control" name="email" placeholder="digite seu melhor e-mail..." />
               </div>

@@ -3,6 +3,15 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 
 const SignUpSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Nome é obrigatório"],
+    
+  },
+  surname: {
+    type: String,
+    required: [true, "Sobrenome é obrigatório"],
+  },
   email: {
     type: String,
     required: [true, "Email obrigatório"],
@@ -28,7 +37,7 @@ export class SignUp {
   async register() {
     this.validate();
     if (this.errors.length > 0) return;
-    
+
     await this.userExists();
 
     if (this.errors.length > 0) return;
@@ -40,11 +49,10 @@ export class SignUp {
       this.user = await SignUpModel.create(this.body);
     } catch (error) {
       console.log(error);
-
-      if (error.code === 11000) {
-        this.errors.push('E-mail já está em uso.');
+      if (error?.code === 11000) {
+        this.errors.push("E-mail já está em uso.");
       } else {
-        this.errors.push('Erro interno ao criar usuário.');
+        this.errors.push("Erro interno ao criar usuário.");
       }
     }
   }
@@ -52,9 +60,16 @@ export class SignUp {
   validate() {
     this.cleanUp();
 
+    if (!this.body.name) this.errors.push(`Nome é obrigatório`);
+    if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório`);
     if (!this.body.email) this.errors.push(`E-mail é obrigatório.`);
-
     if (!this.body.password) this.errors.push(`Senha é obrigatória.`);
+
+    if (
+      !validator.isAlpha(this.body.name, 'pt-BR', { ignore: ' -\''}) ||
+      !validator.isAlpha(this.body.surname, 'pt-BR', { ignore: ' -\''})
+    )
+      this.errors.push("Nome e/ou sobrenome inválido");
 
     if (!validator.isEmail(this.body.email))
       this.errors.push(`E-mail inválido.`);
@@ -86,6 +101,8 @@ export class SignUp {
     }
 
     this.body = {
+      name: this.body.name,
+      surname: this.body.surname,
       email: this.body.email,
       password: this.body.password,
     };

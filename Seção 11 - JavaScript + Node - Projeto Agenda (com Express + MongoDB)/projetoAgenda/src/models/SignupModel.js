@@ -34,7 +34,7 @@ export class SignUp {
   }
 
   async register() {
-    this.validate();
+    this.validateSingUp();
     if (this.errors.length > 0) return;
 
     await this.userExists();
@@ -57,7 +57,7 @@ export class SignUp {
     }
   }
 
-  validate() {
+  validateSingUp() {
     this.cleanUp();
 
     if (!this.body.name) this.errors.push(`Nome é obrigatório.`);
@@ -70,7 +70,7 @@ export class SignUp {
 
     if (
       !validator.isAlpha(this.body.name, "pt-BR", { ignore: "-'" }) ||
-      !validator.isAlpha(this.body.surnamme, "pt-BR", { ignore: "-'" })
+      !validator.isAlpha(this.body.surname, "pt-BR", { ignore: "-'" })
     ) this.errors.push('Nome e/ou sobrenome inválido.')
 
       if (this.body.password.length < 8 || this.body.password.length > 50)
@@ -85,9 +85,9 @@ export class SignUp {
   }
 
   async userExists() {
-    const user = await SignUpModel.findOne({ email: this.body.email });
+    this.user = await SignUpModel.findOne({ email: this.body.email });
 
-    if (user) {
+    if (this.user) {
       this.errors.push(`Usuário já existente.`);
     }
   }

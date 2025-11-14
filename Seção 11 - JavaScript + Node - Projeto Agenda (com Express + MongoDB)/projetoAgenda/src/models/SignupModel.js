@@ -6,10 +6,6 @@ const SignUpSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Nome é obrigatório"],
-<<<<<<< HEAD
-    
-=======
->>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
   },
   surname: {
     type: String,

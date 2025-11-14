@@ -6,7 +6,10 @@ const SignUpSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Nome é obrigatório"],
+<<<<<<< HEAD
     
+=======
+>>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
   },
   surname: {
     type: String,
@@ -35,7 +38,7 @@ export class SignUp {
   }
 
   async register() {
-    this.validate();
+    this.validateSingUp();
     if (this.errors.length > 0) return;
 
     await this.userExists();
@@ -49,6 +52,10 @@ export class SignUp {
       this.user = await SignUpModel.create(this.body);
     } catch (error) {
       console.log(error);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
       if (error?.code === 11000) {
         this.errors.push("E-mail já está em uso.");
       } else {
@@ -57,11 +64,16 @@ export class SignUp {
     }
   }
 
-  validate() {
+  validateSingUp() {
     this.cleanUp();
 
+<<<<<<< HEAD
     if (!this.body.name) this.errors.push(`Nome é obrigatório`);
     if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório`);
+=======
+    if (!this.body.name) this.errors.push(`Nome é obrigatório.`);
+    if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório.`);
+>>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
     if (!this.body.email) this.errors.push(`E-mail é obrigatório.`);
     if (!this.body.password) this.errors.push(`Senha é obrigatória.`);
 
@@ -74,8 +86,13 @@ export class SignUp {
     if (!validator.isEmail(this.body.email))
       this.errors.push(`E-mail inválido.`);
 
-    if (this.body.password.length < 8 || this.body.password.length > 50)
-      this.errors.push(`Senha precisa ter entre 8 e 50 caracteres.`);
+    if (
+      !validator.isAlpha(this.body.name, "pt-BR", { ignore: "-'" }) ||
+      !validator.isAlpha(this.body.surname, "pt-BR", { ignore: "-'" })
+    ) this.errors.push('Nome e/ou sobrenome inválido.')
+
+      if (this.body.password.length < 8 || this.body.password.length > 50)
+        this.errors.push(`Senha precisa ter entre 8 e 50 caracteres.`);
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
@@ -86,9 +103,9 @@ export class SignUp {
   }
 
   async userExists() {
-    const user = await SignUpModel.findOne({ email: this.body.email });
+    this.user = await SignUpModel.findOne({ email: this.body.email });
 
-    if (user) {
+    if (this.user) {
       this.errors.push(`Usuário já existente.`);
     }
   }

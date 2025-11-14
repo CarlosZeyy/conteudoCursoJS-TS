@@ -48,10 +48,6 @@ export class SignUp {
       this.user = await SignUpModel.create(this.body);
     } catch (error) {
       console.log(error);
-<<<<<<< HEAD
-=======
-
->>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
       if (error?.code === 11000) {
         this.errors.push("E-mail já está em uso.");
       } else {
@@ -63,13 +59,8 @@ export class SignUp {
   validateSingUp() {
     this.cleanUp();
 
-<<<<<<< HEAD
     if (!this.body.name) this.errors.push(`Nome é obrigatório`);
     if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório`);
-=======
-    if (!this.body.name) this.errors.push(`Nome é obrigatório.`);
-    if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório.`);
->>>>>>> 28fc1ef84c664a10b298e35be9d5009b3889b686
     if (!this.body.email) this.errors.push(`E-mail é obrigatório.`);
     if (!this.body.password) this.errors.push(`Senha é obrigatória.`);
 

@@ -3,6 +3,10 @@ import { homePage } from "./src/controllers/homeController.js";
 import { login, logged } from "./src/controllers/loginController.js";
 import { signup, register } from "./src/controllers/signupController.js";
 import { logout } from "./src/controllers/logoutController.js";
+import { contact, editContact, registerContact } from "./src/controllers/contactController.js";
+
+//* middleware
+import { loginRequired } from "./src/middlewares/middleware.js";
 
 export const route = express.Router();
 
@@ -19,3 +23,8 @@ route.post('/signup', register);
 
 //logout
 route.get('/logout', logout);
+
+//contact 
+route.get('/contact', loginRequired, contact);
+route.get('/contact/:id', loginRequired, editContact);
+route.post('/contact', loginRequired, registerContact);

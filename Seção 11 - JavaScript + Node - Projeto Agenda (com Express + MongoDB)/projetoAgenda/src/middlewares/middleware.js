@@ -16,3 +16,12 @@ export const csrfMiddleware = (req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
   next();
 }
+
+export const loginRequired = (req, res, next) => {
+  if (!req.session.user) {
+    req.flash('errors', 'Necessário fazer login para continuar.');
+    req.session.save(() => res.redirect('/login'));
+    return;
+  }
+  next();
+}

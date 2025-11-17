@@ -9,7 +9,8 @@ const SignUpSchema = new mongoose.Schema({
   },
   surname: {
     type: String,
-    required: [true, "Sobrenome é obrigatório"],
+    required: false,
+    default: "",
   },
   email: {
     type: String,
@@ -60,26 +61,17 @@ export class SignUp {
     this.cleanUp();
 
     if (!this.body.name) this.errors.push(`Nome é obrigatório`);
-    if (!this.body.surname) this.errors.push(`Sobrenome é obrigatório`);
     if (!this.body.email) this.errors.push(`E-mail é obrigatório.`);
     if (!this.body.password) this.errors.push(`Senha é obrigatória.`);
 
-    if (
-      !validator.isAlpha(this.body.name, 'pt-BR', { ignore: ' -\''}) ||
-      !validator.isAlpha(this.body.surname, 'pt-BR', { ignore: ' -\''})
-    )
-      this.errors.push("Nome e/ou sobrenome inválido");
+    if (!validator.isAlpha(this.body.name, "pt-BR", { ignore: " -'" }))
+      this.errors.push("Nome inválido");
 
     if (!validator.isEmail(this.body.email))
       this.errors.push(`E-mail inválido.`);
 
-    if (
-      !validator.isAlpha(this.body.name, "pt-BR", { ignore: "-'" }) ||
-      !validator.isAlpha(this.body.surname, "pt-BR", { ignore: "-'" })
-    ) this.errors.push('Nome e/ou sobrenome inválido.')
-
-      if (this.body.password.length < 8 || this.body.password.length > 50)
-        this.errors.push(`Senha precisa ter entre 8 e 50 caracteres.`);
+    if (this.body.password.length < 8 || this.body.password.length > 50)
+      this.errors.push(`Senha precisa ter entre 8 e 50 caracteres.`);
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;

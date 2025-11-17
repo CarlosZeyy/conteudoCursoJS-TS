@@ -4,7 +4,6 @@ export const signup = (req, res) => {
   return res.render("signup");
 };
 
-
 export const register = async (req, res) => {
   const redirectBack = () => res.redirect(req.get("Referer") || "signup");
   const registerSuccess = () => res.redirect(req.get("login") || "login");

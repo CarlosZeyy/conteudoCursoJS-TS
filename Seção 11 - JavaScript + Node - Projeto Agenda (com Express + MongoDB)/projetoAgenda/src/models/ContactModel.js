@@ -24,6 +24,11 @@ const ContactSchema = new mongoose.Schema({
     default: "",
     trim: true,
   },
+  comment: {
+    type: String,
+    required: false,
+    default: "",
+  },
   criadoEm: {
     type: Date,
     default: Date.now,
@@ -79,6 +84,7 @@ export class Contact {
       surname: this.body.surname,
       email: this.body.email,
       telefone: this.body.telefone,
+      comment: this.body.comment,
     };
   }
 }

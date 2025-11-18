@@ -23,14 +23,14 @@ export const registerContact = async (req, res) => {
     return;
   } catch (error) {
     console.log(error);
-    return res.render("404");
+    return res.render("errors/404");
   }
 };
 
 export const editContact = async (req, res) => {
-  if (!req.params.id) return res.render("404");
+  if (!req.params.id) return res.render("errors/404");
   const contact = await Contact.findById(req.params.id);
-  if (!contact) return res.render("404");
+  if (!contact) return res.render("errors/404");
 
   res.render("contact", { contact });
 };

@@ -7,7 +7,7 @@ export const signup = (req, res) => {
 export const register = async (req, res) => {
   const redirectBack = () => res.redirect(req.get("Referer") || "signup");
   const registerSuccess = () => res.redirect(req.get("login") || "login");
-  
+
   try {
     const signup = new SignUp(req.body);
     await signup.register();
@@ -22,6 +22,6 @@ export const register = async (req, res) => {
     req.session.save(registerSuccess);
   } catch (error) {
     console.log(error);
-    return res.render("404");
+    return res.render("errors/404");
   }
 };

@@ -1,10 +1,10 @@
 import { Login } from "../models/LoginModel.js";
 
 export const login = (req, res) => {
-    if (req.session.user) {
-        return res.render('logged');
-    }
-    return res.render("login");
+  if (req.session.user) {
+    return res.render("logged");
+  }
+  return res.render("login");
 };
 
 export const logged = async (req, res) => {
@@ -22,9 +22,9 @@ export const logged = async (req, res) => {
 
     req.flash("success", "Logado com sucesso.");
     req.session.user = login.user;
-    req.session.save('redirectBack');
+    req.session.save("redirectBack");
   } catch (error) {
     console.log(error);
-    return res.render("404");
+    return res.render("errors/404");
   }
 };

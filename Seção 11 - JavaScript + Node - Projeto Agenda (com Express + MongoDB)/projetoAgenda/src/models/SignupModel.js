@@ -2,30 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
-const SignUpSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Nome é obrigatório"],
-  },
-  surname: {
-    type: String,
-    required: false,
-    default: "",
-  },
-  email: {
-    type: String,
-    required: [true, "Email obrigatório"],
-    unique: true,
-    lowercase: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-    required: [true, "Senha é obrigatório"],
-  },
-});
-
-export const SignUpModel = mongoose.model("SignUp", SignUpSchema);
+import { UserModel } from "./UserModel.js";
 
 export class SignUp {
   constructor(body) {
@@ -46,7 +23,7 @@ export class SignUp {
     this.body.password = bcrypt.hashSync(this.body.password, salt);
 
     try {
-      this.user = await SignUpModel.create(this.body);
+      this.user = await UserModel.create(this.body);
     } catch (error) {
       console.log(error);
       if (error?.code === 11000) {
@@ -82,7 +59,7 @@ export class SignUp {
   }
 
   async userExists() {
-    this.user = await SignUpModel.findOne({ email: this.body.email });
+    this.user = await UserModel.findOne({ email: this.body.email });
 
     if (this.user) {
       this.errors.push(`Usuário já existente.`);

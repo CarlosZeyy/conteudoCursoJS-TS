@@ -22,7 +22,7 @@ export const logged = async (req, res) => {
 
     req.flash("success", "Logado com sucesso.");
     req.session.user = login.user;
-    req.session.save("redirectBack");
+    req.session.save(redirectBack);
   } catch (error) {
     console.log(error);
     return res.render("errors/404");

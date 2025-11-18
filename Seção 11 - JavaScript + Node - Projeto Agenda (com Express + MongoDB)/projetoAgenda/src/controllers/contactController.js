@@ -34,3 +34,28 @@ export const editContact = async (req, res) => {
 
   res.render("contact", { contact });
 };
+
+export const updateContact = async (req, res) => {
+  const redirectBackContact = () => {
+    if (req.params.id) return res.redirect(`/contact/${req.params.id}`);
+    return res.redirect(`/contact`);
+  };
+  try {
+    if (!req.params.id) return res.render("errors/404");
+    const contact = new Contact(req.body);
+    await contact.editAndUpdate(req.params.id);
+
+    if (contact.errors.length > 0) {
+      req.flash("errors", contact.errors);
+      req.session.save(redirectBackContact);
+      return;
+    }
+
+    req.flash("success", "Contato editado com sucesso.");
+    req.session.save(() => res.redirect(`/contact/${contact.contact._id}`));
+    return;
+  } catch (error) {
+    console.log(error);
+    return res.render("errors/404");
+  }
+};

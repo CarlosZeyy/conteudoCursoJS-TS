@@ -32,7 +32,7 @@ const ContactSchema = new mongoose.Schema({
   criadoEm: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 export const ContactModel = mongoose.model("Contact", ContactSchema);
@@ -51,7 +51,7 @@ export class Contact {
   }
 
   static async findById(id) {
-    if (typeof id !== 'string') return;
+    if (typeof id !== "string") return;
 
     const user = await ContactModel.findById(id);
     return user;
@@ -86,5 +86,12 @@ export class Contact {
       telefone: this.body.telefone,
       comment: this.body.comment,
     };
+  }
+
+  async editAndUpdate(id) {
+    if (typeof id !== "string") return;
+    this.validateContact();
+    if (this.errors.length > 0) return;
+    this.contact = await ContactModel.findByIdAndUpdate(id, this.body, { new: true });
   }
 }

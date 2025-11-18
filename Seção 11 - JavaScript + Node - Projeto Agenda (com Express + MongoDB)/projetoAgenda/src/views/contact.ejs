@@ -1,80 +1,54 @@
 <%- include('includes/head') %> <%- include('includes/nav') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2"></div>
 
-    <div class="col-lg-8 my-3">
-      <h2 class="text-center mt-5">Contatos</h2>
-      <p class="text-center">
-        Registre novo contato ou edite um contato existente.
-      </p>
+        <div class="col-lg-8 my-3">
+          <h2 class="text-center mt-5">Contatos</h2>
+          <p class="text-center">
+            Registre novo contato ou edite um contato existente.
+          </p>
 
-      <%- include('includes/messages') %>
+          <%- include('includes/messages') %>
 
-      <form action="/contact" method="post">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-        <div class="mb-3">
-          <label class="form-label">Nome:</label>
-          <input
-            value="<%= contact.name %>"
-            type="text"
-            class="form-control"
-            name="name"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Sobrenome:</label>
-          <input
-            value="<%= contact.surname %>"
-            type="text"
-            class="form-control"
-            name="surname"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Email:</label>
-          <input
-            value="<%= contact.email %>"
-            type="email"
-            class="form-control"
-            name="email"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Telefone:</label>
-          <input
-            value="<%= contact.telefone %>"
-            type="tel"
-            class="form-control"
-            name="telefone"
-          />
-        </div>
-        <div class="mb-3">
-          <div class="form-floating">
-            <textarea
-              class="form-control"
-              placeholder="Leave a comment here"
-              id="floatingTextarea"
-              name="comment"
-              maxlength="300"
-              rows="3"
-              style="height: auto;"
-            >
-<%= contact.comment %></textarea
-            >
-            <label for="floatingTextarea"
-              >Registrar algum lembrete sobre o contato... (300 max)</label
-            >
-          </div>
+            <% if(contact._id) { %>
+              <form action="/contact/edit/<%= contact._id %>" method="post">
+                <% } else { %>
+                  <form action="/contact" method="post">
+                    <% } %>
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                      <div class="mb-3">
+                        <label class="form-label">Nome:</label>
+                        <input value="<%= contact.name %>" type="text" class="form-control" name="name" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Sobrenome:</label>
+                        <input value="<%= contact.surname %>" type="text" class="form-control" name="surname" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email:</label>
+                        <input value="<%= contact.email %>" type="email" class="form-control" name="email" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Telefone:</label>
+                        <input value="<%= contact.telefone %>" type="tel" class="form-control" name="telefone" />
+                      </div>
+                      <div class="mb-3">
+                        <div class="form-floating">
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                            name="comment" maxlength="300" rows="3" style="height: auto;">
+<%= contact.comment %></textarea>
+                          <label for="floatingTextarea">Registrar algum lembrete sobre o contato... (300 max)</label>
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                  </form>
         </div>
 
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </form>
+        <div class="col-lg-2"></div>
+      </div>
     </div>
 
-    <div class="col-lg-2"></div>
-  </div>
-</div>
-
-<%- include('includes/footer') %>
+    <%- include('includes/footer') %>

@@ -4,7 +4,7 @@ import validator from "validator";
 const ContactSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Nome é obrigatório"],
+    required: [true, "Nome é obrigatório."],
   },
   surname: {
     type: String,
@@ -60,10 +60,10 @@ export class Contact {
   validateContact() {
     this.cleanUp();
 
-    if (!this.body.name) this.errors.push(`Nome é obrigatório`);
+    if (!this.body.name) this.errors.push(`Nome é obrigatório.`);
 
     if (!validator.isAlpha(this.body.name, "pt-BR", { ignore: " -'" }))
-      this.errors.push("Nome inválido");
+      this.errors.push("Nome inválido.");
 
     if (this.body.email && !validator.isEmail(this.body.email))
       this.errors.push(`E-mail inválido.`);

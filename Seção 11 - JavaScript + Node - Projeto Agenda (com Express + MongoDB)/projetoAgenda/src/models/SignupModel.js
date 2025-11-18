@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-
 import { UserModel } from "./UserModel.js";
 
 export class SignUp {
@@ -37,12 +35,12 @@ export class SignUp {
   validateSingUp() {
     this.cleanUp();
 
-    if (!this.body.name) this.errors.push(`Nome é obrigatório`);
+    if (!this.body.name) this.errors.push(`Nome é obrigatório.`);
     if (!this.body.email) this.errors.push(`E-mail é obrigatório.`);
     if (!this.body.password) this.errors.push(`Senha é obrigatória.`);
 
     if (!validator.isAlpha(this.body.name, "pt-BR", { ignore: " -'" }))
-      this.errors.push("Nome inválido");
+      this.errors.push("Nome inválido.");
 
     if (!validator.isEmail(this.body.email))
       this.errors.push(`E-mail inválido.`);
@@ -54,7 +52,7 @@ export class SignUp {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
     if (!passwordRegex.test(this.body.password))
       this.errors.push(
-        `A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial.`
+        `A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial (@$!%*?&).`
       );
   }
 

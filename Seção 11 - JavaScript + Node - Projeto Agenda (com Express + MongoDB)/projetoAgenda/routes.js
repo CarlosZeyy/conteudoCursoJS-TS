@@ -3,7 +3,7 @@ import { homePage } from "./src/controllers/homeController.js";
 import { login, logged } from "./src/controllers/loginController.js";
 import { signup, register } from "./src/controllers/signupController.js";
 import { logout } from "./src/controllers/logoutController.js";
-import { contact, editContact, registerContact, updateContact } from "./src/controllers/contactController.js";
+import { contact, editContact, registerContact, updateContact, deleteContact } from "./src/controllers/contactController.js";
 
 //* middleware
 import { loginRequired } from "./src/middlewares/middleware.js";
@@ -27,5 +27,6 @@ route.get('/logout', logout);
 //contact 
 route.get('/contact', loginRequired, contact);
 route.get('/contact/:id', loginRequired, editContact);
+route.get('/contact/delete/:id', loginRequired, deleteContact);
 route.post('/contact', loginRequired, registerContact);
 route.post('/contact/edit/:id', loginRequired, updateContact);

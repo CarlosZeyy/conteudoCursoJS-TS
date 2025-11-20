@@ -6,21 +6,37 @@
 
     <div class="col-lg-8 my-3">
       <h1 class="text-center fw-medium">Agenda</h1>
-      <p class="text-center lead">Seus contatos:</p>
+      <p class="text-center lead fw-normal">Seus contatos:</p>
     </div>
 
     <%- include('includes/messages') %>
 
-    <div class="responsive-table">
+    <% if (contacts.length > 0) { %>
+      <div class="responsive-table">
       <table class="table my-3">
         <tr>
-          <td>Carlos</td>
-          <td>Moises</td>
-          <td>1111111111</td>
-          <td>carlos@gmail.com</td>
+          <td><h3 class="fs-6">NOME</h3></td>
+          <td><h3 class="fs-6">SOBRENOME</h3></td>
+          <td><h3 class="fs-6">TELEFONE</h3></td>
+          <td><h3 class="fs-6">EMAIL</h3></td>
+          <td><h3 class="fs-6">DESCRIÇÃO</h3></td>
         </tr>
+        <% contacts.forEach(contact => { %>
+          <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.surname %></td>
+          <td><%= contact.telefone %></td>
+          <td><%= contact.email %></td>
+          <td style="max-width: 250px; overflow: auto;"><%= contact.comment %></td>
+          <td><a class="fw-medium link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/contact/<%= contact._id %>">Editar</a></td>
+          <td><a class="fw-medium link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover link-danger text-danger" href="/contact/delete/<%= contact._id %>">Excluir</a></td>
+        </tr>
+        <% }); %>
       </table>
     </div>
+      <% } else { %>
+        <p class="text-center lead fw-bolder">Não existe nenhum contato salvo na sua agenda.</p>
+      <% } %>
 
     <div class="col-lg-2"></div>
   </div>

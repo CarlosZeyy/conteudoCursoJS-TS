@@ -50,13 +50,6 @@ export class Contact {
     this.contact = await ContactModel.create(this.body);
   }
 
-  static async findById(id) {
-    if (typeof id !== "string") return;
-
-    const user = await ContactModel.findById(id);
-    return user;
-  }
-
   validateContact() {
     this.cleanUp();
 
@@ -92,6 +85,26 @@ export class Contact {
     if (typeof id !== "string") return;
     this.validateContact();
     if (this.errors.length > 0) return;
-    this.contact = await ContactModel.findByIdAndUpdate(id, this.body, { new: true });
+    this.contact = await ContactModel.findByIdAndUpdate(id, this.body, {
+      new: true,
+    });
+  }
+
+  static async findById(id) {
+    if (typeof id !== "string") return;
+
+    const contact = await ContactModel.findById(id);
+    return contact;
+  }
+
+  static async findContacts() {
+    const contacts = await ContactModel.find().sort({ criadoEm: -1 });
+    return contacts;
+  }
+
+  static async delete(id) {
+    if (typeof id !== "string") return;
+    const contact = await ContactModel.findOneAndDelete({_id: id});
+    return contact;
   }
 }

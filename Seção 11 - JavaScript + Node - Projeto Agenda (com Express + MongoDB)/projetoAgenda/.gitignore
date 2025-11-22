@@ -1,4 +1,5 @@
 node_modules/
 public/assets/js/bundle.js
 public/assets/js/bundle.js.map
+package-lock.json
 .env

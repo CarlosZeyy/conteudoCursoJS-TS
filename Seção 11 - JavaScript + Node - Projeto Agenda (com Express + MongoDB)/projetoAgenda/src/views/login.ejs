@@ -10,10 +10,10 @@
 
       <%- include('includes/messages') %>
 
-      <form action="/login" method="post">
+      <form action="/login" class="form-login" method="post">
         <input type="hidden" name="_csrf" value="<%= csrfToken  %>" />
 
-        <div class="mb-3">
+        <div class="mb-3 email">
           <label class="form-label">Email:</label>
           <input
             type="email"
@@ -22,7 +22,7 @@
             placeholder="digite seu e-mail..."
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3 password">
           <label class="form-label">Senha:</label>
           <input
             type="password"

@@ -20,8 +20,6 @@ mongoose
   })
   .catch(e => console.log(e));
 
-const PORT = 5000;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -59,8 +57,8 @@ app.use(csrfMiddleware);
 app.use(route);
 
 app.on("pronto", () => {
-  app.listen(PORT, () => {
-    console.log(`Escutando o servidor na porta ${PORT}/`);
-    console.log(`Servidor on: http://localhost:${PORT}/`);
+  app.listen(process.env.PORT, () => {
+    console.log(`Escutando o servidor na porta ${process.env.PORT}/`);
+    console.log(`Servidor on: http://localhost:${process.env.PORT}/`);
   });
 });

@@ -3,10 +3,14 @@ import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 import { route } from "./routes.js";
 import path from "path";
-import helmet from 'helmet';
+import helmet from "helmet";
 import csurf from "csurf";
 import { fileURLToPath } from "url";
-import { middlewareGlobal, checkCsrfError, csrfMiddleware } from "./src/middlewares/middleware.js";
+import {
+  middlewareGlobal,
+  checkCsrfError,
+  csrfMiddleware,
+} from "./src/middlewares/middleware.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import flash from "connect-flash";
@@ -18,7 +22,7 @@ mongoose
   .then(() => {
     app.emit("pronto");
   })
-  .catch(e => console.log(e));
+  .catch((e) => console.log(e));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,28 +33,25 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
 
 const sessionOptions = session({
-  secret: 'Testando session - posso colocar qualquer coisa',
+  secret: "Testando session - posso colocar qualquer coisa",
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB,
-    // mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true}
   }),
   resave: false,
   saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    httpOnly: true 
-  }
+    httpOnly: true,
+  },
 });
 
 app.use(sessionOptions);
 app.use(flash());
 
-app.set("views", path.resolve(__dirname, "src", "views")); //* caminho absoluto
-// app.set("views", path.resolve('./src/views')); //* caminho relativo
+app.set("views", path.resolve(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 
 app.use(csurf());
-//* Middlewares criados
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
 app.use(csrfMiddleware);

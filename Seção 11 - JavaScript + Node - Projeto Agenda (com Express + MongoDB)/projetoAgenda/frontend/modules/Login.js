@@ -49,11 +49,12 @@ export default class Login {
     const lastPasswordError = passwordDiv.querySelector(".message-error");
     if (lastPasswordError) lastPasswordError.remove();
 
-    const divPasswordError = document.createElement('div');
-    const linhaError1 = document.createElement('div');
-    const linhaError2 = document.createElement('div');
+    const divPasswordError = document.createElement("div");
+    const linhaError1 = document.createElement("div");
+    const linhaError2 = document.createElement("div");
 
-    linhaError1.textContent = 'A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial (@$!%*?&).';
+    linhaError1.textContent =
+      "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial (@$!%*?&).";
     linhaError2.textContent = "Senha precisa ter entre 8 e 50 caracteres.";
 
     divPasswordError.classList.add("message-error");
@@ -65,5 +66,7 @@ export default class Login {
       passwordDiv.appendChild(divPasswordError);
       error = true;
     }
+
+    if (!error) el.submit();
   }
 }

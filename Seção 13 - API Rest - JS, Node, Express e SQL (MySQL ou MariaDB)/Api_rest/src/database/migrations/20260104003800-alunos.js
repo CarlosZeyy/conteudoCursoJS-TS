@@ -1,6 +1,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up(queryInterface, Sequelize) {
     return queryInterface.createTable('alunos', {
       id: {
         type: Sequelize.INTEGER,
@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
       },
       idade: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       peso: {
@@ -43,7 +43,7 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  down(queryInterface, Sequelize) {
     queryInterface.dropTable('alunos');
   },
 };

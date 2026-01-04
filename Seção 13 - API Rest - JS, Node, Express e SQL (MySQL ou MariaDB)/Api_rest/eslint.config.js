@@ -47,6 +47,7 @@ export default [
       "template-curly-spacing": ["error", "never"],
       "import/extensions": ["error", "ignorePackages"],
       "import/no-unresolved": "off",
+      "no-unsed-vars": false,
     },
   },
 ];

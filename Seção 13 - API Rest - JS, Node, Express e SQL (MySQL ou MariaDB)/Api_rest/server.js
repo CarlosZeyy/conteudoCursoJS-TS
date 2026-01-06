@@ -1,6 +1,7 @@
-import app from './app.js';
 import { configDotenv } from 'dotenv';
 configDotenv();
+
+import app from './app.js';
 
 app.listen(process.env.PORT, () => {
   console.log();

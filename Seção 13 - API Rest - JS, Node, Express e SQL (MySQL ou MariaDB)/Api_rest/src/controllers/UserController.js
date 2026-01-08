@@ -4,7 +4,11 @@ class UserController {
   async store(req, res) {
     try {
       const novoUser = await User.create(req.body);
-      return res.json(novoUser);
+      const { password_hash, ...userSemSenha } = novoUser.toJSON();
+      return res.json({
+        message: "Usuário criado com sucesso.",
+        user: userSemSenha,
+      });
     } catch (error) {
       return res.status(400).json({
         errors: error.errors.map((err) => err.message),
@@ -14,11 +18,13 @@ class UserController {
 
   async index(req, res) {
     try {
-      const users = await User.findAll(req.body);
+      const users = await User.findAll({
+        attributes: { exclude: ["password_hash"] },
+      });
       return res.json(users);
     } catch (error) {
       return res.status(400).json({
-        erorrs: ["Erro ao buscar usuários."],
+        errors: ["Erro ao buscar usuários."],
       });
     }
   }
@@ -27,21 +33,23 @@ class UserController {
     try {
       if (!req.params.id) {
         return res.status(400).json({
-          erorrs: ["Erro: Id do usuário não encontrado ou não existe."],
+          errors: ["Erro: Id do usuário não encontrado ou não existe."],
         });
       }
 
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id, {
+        attributes: { exclude: ["password_hash"] },
+      });
 
       if (!user) {
         return res.status(400).json({
-          erorrs: ["Erro: Usuário não encontrado ou não existe."],
+          errors: ["Erro: Usuário não encontrado ou não existe."],
         });
       }
       return res.json(user);
     } catch (error) {
       return res.status(400).json({
-        erorrs: ["Erro ao buscar usuário."],
+        errors: ["Erro ao buscar usuário."],
       });
     }
   }
@@ -50,20 +58,30 @@ class UserController {
     try {
       if (!req.params.id) {
         return res.status(400).json({
-          erorrs: ["Erro: Id do usuário não encontrado."],
+          errors: ["Erro: Id do usuário não encontrado."],
         });
       }
 
-      const user = await User.findByPk(req.params.id);
+      if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({
+          errors: ["Erro: Nenhum dado foi enviado para atualização."],
+        });
+      }
+      const user = await User.findByPk(req.params.id, {
+        attributes: { exclude: ["password_hash"] },
+      });
 
       if (!user) {
         return res.status(400).json({
-          erorrs: ["Erro: Usuário não encontrado."],
+          errors: ["Erro: Usuário não encontrado."],
         });
       }
 
       const updatedData = await user.update(req.body);
-      return res.json(updatedData);
+      return res.json({
+        message: "Usuário atualizado com sucesso.",
+        user: updatedData,
+      });
     } catch (error) {
       return res.status(400).json({
         errors: error.errors.map((err) => err.message),
@@ -75,7 +93,7 @@ class UserController {
     try {
       if (!req.params.id) {
         return res.status(400).json({
-          erorrs: ["Erro: Id do usuário não encontrado."],
+          errors: ["Erro: Id do usuário não encontrado."],
         });
       }
 
@@ -83,12 +101,17 @@ class UserController {
 
       if (!user) {
         return res.status(400).json({
-          erorrs: ["Erro: Usuário não encontrado."],
+          errors: ["Erro: Usuário não encontrado."],
         });
       }
 
       await user.destroy();
-      return res.json(user);
+      return res.json({
+        message: "Usuário deletado com sucesso.",
+        deletedUser: {
+          id: user.id,
+        },
+      });
     } catch (error) {
       return res.status(400).json({
         errors: error.errors.map((err) => err.message),

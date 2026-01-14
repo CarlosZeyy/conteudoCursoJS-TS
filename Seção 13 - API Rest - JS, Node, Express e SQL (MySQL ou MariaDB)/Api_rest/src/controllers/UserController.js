@@ -21,6 +21,8 @@ class UserController {
       const users = await User.findAll({
         attributes: { exclude: ["password_hash"] },
       });
+      console.log('USER ID: ', req.userId);
+      console.log('USER EMAIL: ', req.userEmail);
       return res.json(users);
     } catch (error) {
       return res.status(400).json({

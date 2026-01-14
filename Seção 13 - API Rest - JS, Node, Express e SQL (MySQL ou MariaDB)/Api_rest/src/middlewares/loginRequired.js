@@ -1,5 +1,3 @@
-/** exporta uma function que vai pegar o campo de auth do header, checar se ela existe, seperar o berear e o token, e vefirificar se existe o token, id, email do user*/
-
 import jwt from "jsonwebtoken";
 
 export default (req, res, next) => {

@@ -65,10 +65,14 @@ class UserController {
         });
       }
 
+      const passwordChanged = req.body.password ? true : false;
       const updatedData = await user.update(req.body);
       return res.json({
-        message: "Usuário atualizado com sucesso.",
+        message: passwordChanged
+          ? "Usuário atualizado com sucesso. Por favor, faça login novamente."
+          : "Usuário atualizado com sucesso.",
         user: updatedData,
+        requiresRelogin: passwordChanged,
       });
     } catch (error) {
       return res.status(400).json({

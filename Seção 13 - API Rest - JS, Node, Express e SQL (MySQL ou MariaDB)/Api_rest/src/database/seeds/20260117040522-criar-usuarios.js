@@ -6,7 +6,7 @@ const criarUser = async () => {
   return {
     nome,
     email: faker.internet.email({ firstName: nome }),
-    password_hash: await bcrypt.hash("123456", 8),
+    password_hash: await bcrypt.hash(faker.internet.password(8), 8),
     created_at: new Date(),
     updated_at: new Date(),
   };

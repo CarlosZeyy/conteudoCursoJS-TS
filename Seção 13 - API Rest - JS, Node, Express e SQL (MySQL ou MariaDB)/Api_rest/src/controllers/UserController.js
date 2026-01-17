@@ -31,13 +31,7 @@ class UserController {
 
   async show(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ["Erro: Id do usuário não encontrado ou não existe."],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id, {
+      const user = await User.findByPk(req.userId, {
         attributes: { exclude: ["password_hash"] },
       });
 
@@ -56,18 +50,12 @@ class UserController {
 
   async update(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ["Erro: Id do usuário não encontrado."],
-        });
-      }
-
       if (Object.keys(req.body).length === 0) {
         return res.status(400).json({
           errors: ["Erro: Nenhum dado foi enviado para atualização."],
         });
       }
-      const user = await User.findByPk(req.params.id, {
+      const user = await User.findByPk(req.userId, {
         attributes: { exclude: ["password_hash"] },
       });
 
@@ -91,13 +79,7 @@ class UserController {
 
   async delete(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ["Erro: Id do usuário não encontrado."],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userId);
 
       if (!user) {
         return res.status(400).json({

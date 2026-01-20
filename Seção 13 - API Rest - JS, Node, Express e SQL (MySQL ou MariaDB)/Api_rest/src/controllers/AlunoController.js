@@ -75,11 +75,11 @@ class AlunoController {
         });
       }
 
-      const updatedData = await aluno.update(req.body);
+      const alunoUpdated = await aluno.update(req.body);
 
       return res.json({
         message: "Aluno atualizado com sucesso",
-        aluno: updatedData,
+        aluno: alunoUpdated,
       });
     } catch (error) {
       return res.status(400).json({

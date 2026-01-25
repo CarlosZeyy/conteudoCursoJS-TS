@@ -14,12 +14,24 @@ class FotoController {
         });
       }
 
-      const { originalname, filename } = req.file;
-      const { aluno_id } = req.body;
+      try {
+        const { originalname, filename } = req.file;
+        const { aluno_id } = req.body;
 
-      const foto = await Foto.create({ originalname, filename, aluno_id });
+        if (!aluno_id) {
+          return res.status(400).json({
+          errors: ["Aluno inválido ou não existe."],
+          })
+        }
 
-      return res.json(foto);
+        const foto = await Foto.create({ originalname, filename, aluno_id });
+
+        return res.json(foto);
+      } catch (error) {
+        return res.status(400).json({
+          errors: ["Aluno inválido ou não existe."],
+        });
+      }
     });
   }
 }

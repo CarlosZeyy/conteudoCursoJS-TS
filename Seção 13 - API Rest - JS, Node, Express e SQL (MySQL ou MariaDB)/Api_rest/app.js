@@ -1,13 +1,15 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import express from 'express';
-import homeRoutes from './src/routes/homeRoutes.js';
-import userRoutes from './src/routes/userRoutes.js';
-import tokenRoutes from './src/routes/tokenRoutes.js';
-import alunoRoutes from './src/routes/alunoRoutes.js';
-import fotoRoutes from './src/routes/fotoRoutes.js';
-import './src/database';
 
+import express from "express";
+import { resolve } from "path";
+
+import homeRoutes from "./src/routes/homeRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import tokenRoutes from "./src/routes/tokenRoutes.js";
+import alunoRoutes from "./src/routes/alunoRoutes.js";
+import fotoRoutes from "./src/routes/fotoRoutes.js";
+import "./src/database";
 
 class App {
   constructor() {
@@ -19,16 +21,16 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(express.static(resolve(__dirname, "uploads")));
   }
 
   routes() {
-    this.app.use('/', homeRoutes);
-    this.app.use('/users/', userRoutes);
-    this.app.use('/tokens', tokenRoutes);
-    this.app.use('/alunos', alunoRoutes);
-    this.app.use('/fotos', fotoRoutes);
+    this.app.use("/", homeRoutes);
+    this.app.use("/users/", userRoutes);
+    this.app.use("/tokens", tokenRoutes);
+    this.app.use("/alunos", alunoRoutes);
+    this.app.use("/fotos", fotoRoutes);
   }
 }
-
 
 export default new App().app;

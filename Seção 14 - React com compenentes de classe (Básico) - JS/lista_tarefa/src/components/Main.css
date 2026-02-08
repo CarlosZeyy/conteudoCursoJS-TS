@@ -1,0 +1,12 @@
+.main {
+  background: #fff;
+  padding: 3rem;
+  margin: 5rem auto;
+  max-width: 50rem;
+  border-radius: 0.4rem;
+}
+
+.main h1 {
+  font-size: 2rem;
+  text-align: center;
+}

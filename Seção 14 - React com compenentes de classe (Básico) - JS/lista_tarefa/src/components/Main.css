@@ -7,6 +7,37 @@
 }
 
 .main h1 {
-  font-size: 2rem;
+  font-size: 3.2rem;
   text-align: center;
+}
+
+.form {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputField {
+  height: 4rem;
+  padding: 0 2rem;
+  font-size: 2rem;
+  border: 1px solid #ccc;
+  min-width: 80%;
+}
+
+.sendBtn {
+  margin-left: 0.8rem;
+  border: none;
+  height: 4rem;
+  width: 4rem;
+  background-color: #f04c64;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendBtn:hover {
+  background-color: #dd3b53;
 }

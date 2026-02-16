@@ -26,7 +26,7 @@
   min-width: 80%;
 }
 
-.sendBtn {
+.taskBtn {
   margin-left: 0.8rem;
   border: none;
   height: 4rem;
@@ -38,6 +38,49 @@
   justify-content: center;
 }
 
-.sendBtn:hover {
+.taskBtn:hover {
   background-color: #dd3b53;
+}
+
+.tasks {
+  margin-top: 3rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.tasks li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  transition: all 0.5s;
+}
+
+.tasks li:hover {
+  background: #cccccc3d;
+}
+
+.edit, .delete {
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.edit {
+  color: #51c5de;
+}
+
+.edit:hover {
+  color: #44a2b7;
+  transition: all 0.5s;
+
+}
+
+.delete {
+  color: #f04c64;
+}
+
+.delete:hover {
+  color: #dd3b53;
+  transition: all 0.5s;
+
 }

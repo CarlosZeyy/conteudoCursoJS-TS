@@ -56,6 +56,11 @@
   transition: all 0.5s;
 }
 
+.tasks li div {
+  display: flex;
+  align-items: center;
+}
+
 .tasks li:hover {
   background: #cccccc3d;
 }
